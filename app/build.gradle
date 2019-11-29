@@ -1,0 +1,86 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: "kotlin-kapt"
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.zainco.dtag"
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def appDependencies = rootProject.ext.appDependencies
+    def appTestDependencies = rootProject.ext.appTestDependencies
+    implementation appDependencies.supportLibrary13
+    implementation appDependencies.supportLibrary4
+    implementation appDependencies.appCompatV7
+    implementation appDependencies.supportRecyclerView
+    implementation appDependencies.supportDesign
+    implementation appDependencies.javaxAnnotation
+    implementation appDependencies.kotlin
+    implementation appDependencies.javaxInject
+    implementation appDependencies.rxKotlin
+    implementation appDependencies.archRuntime
+    implementation appDependencies.lifecycle
+    implementation appDependencies.okHttp
+    implementation appDependencies.okHttpLogger
+    implementation appDependencies.gson
+    implementation appDependencies.rxAndroid
+    implementation appDependencies.androidAnnotations
+    implementation appDependencies.retrofit
+    implementation appDependencies.retrofitConverter
+    implementation appDependencies.retrofitAdapter
+    implementation appDependencies.archExtensions
+    implementation appDependencies.koinCore
+    implementation appDependencies.koinTest
+    implementation appDependencies.koinAndroid
+    implementation appDependencies.koinAndroidx
+    implementation appDependencies.koinJava
+    implementation appDependencies.rxBinding
+    implementation appDependencies.multidex
+    implementation(appDependencies.crashlytics) {
+        transitive = true
+    }
+    implementation appDependencies.constraintlayout
+    implementation appDependencies.navigationUi
+    implementation appDependencies.navigationFragment
+    implementation appDependencies.cardView
+    implementation appDependencies.roomRuntime
+    implementation appDependencies.roomRx
+    implementation appDependencies.rxJavaMath
+    implementation appDependencies.playServicesVision
+    implementation appDependencies.picasso
+    implementation appDependencies.threetenabp
+    implementation appDependencies.fcm
+    implementation appDependencies.ktx
+    implementation appDependencies.lifecycleViewModel
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    kapt appDependencies.roomCompiler
+    kapt appDependencies.archCompiler
+    testImplementation appTestDependencies.junit
+    testImplementation appTestDependencies.mockito
+    testImplementation appTestDependencies.assertj
+}

@@ -1,0 +1,103 @@
+ext {
+    //Libraries
+    kotlinVersion = '1.3.21'
+    rxKotlinVersion = '2.1.0'
+    rxAndroidVersion = '2.1.1'
+    javaxAnnotationVersion = '1.0'
+    material = '1.2.0-alpha01'
+    javaxInjectVersion = '1'
+    gsonVersion = '2.8.1'
+    okHttpVersion = '3.8.1'
+    androidAnnotationsVersion = '21.0.3'
+    retrofitVersion = '2.4.0'
+    roomVersion = '2.1.0-alpha06'
+    supportLibraryVersion = '26.0.1'
+    timberVersion = '4.5.1'
+    glideVersion = '4.0.0'
+    daggerVersion = '2.15'
+    glassfishAnnotationVersion = '10.0-b28'
+    archCompVersion = '1.0.0'
+    lifecycleVersion = '2.0.0-rc01'
+    constraintlayoutVersion = '1.1.3'
+    lifecycleViewModel = '2.1.0'
+    androidx = '1.0.0'
+    multidex = '2.0.0'
+    koin = '1.0.1'
+    robolectricVersion = '3.4.2'
+    jUnitVersion = '4.12'
+    assertJVersion = '3.8.0'
+    mockitoVersion = '1.9.5'
+    dexmakerVersion = '1.0'
+    espressoVersion = '3.0.0'
+    testingSupportLibVersion = '0.1'
+    mockitoKotlinVersion = '1.5.0'
+    mockitoAndroidVersion = '2.8.47'
+    androidSupportRunnerVersion = '1.0.0'
+    androidSupportRulesVersion = '1.0.0'
+    dexmakerMockitoversion = '2.2.0'
+    runnerVersion = '0.5'
+    crashlytics = '2.9.5@aar'
+    testRulesVersion = '1.0.2'
+    navigation = '2.1.0'
+    rxjavaMath = '1.0.0'
+    playServicesVision = '17.0.2'
+    picasso='2.71828'
+    threetenabp='1.1.0'
+    leakcanary='2.0-beta-3'
+    fcm ='20.0.0'
+    ktx ='1.1.0'
+    appDependencies = [
+            supportLibrary13   : "androidx.legacy:legacy-support-v13:${androidx}",
+            supportLibrary4    : "androidx.legacy:legacy-support-v4:${androidx}",
+            appCompatV7        : "androidx.appcompat:appcompat:${androidx}",
+            supportRecyclerView: "androidx.recyclerview:recyclerview:${androidx}",
+            supportDesign      : "com.google.android.material:material:${material}",
+            okHttp             : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            okHttpLogger       : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            constraintlayout   : "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
+            gson               : "com.google.code.gson:gson:${gsonVersion}",
+            rxKotlin           : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            kotlin             : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+            rxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxJavaMath         : "io.reactivex:rxjava-math:${rxjavaMath}",
+            javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject        : "javax.inject:javax.inject:${javaxInjectVersion}",
+            androidAnnotations : "com.android.support:support-annotations:${androidAnnotationsVersion}",
+            retrofit           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter  : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitAdapter    : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            archRuntime        : "android.arch.lifecycle:runtime:${archCompVersion}",
+            archExtensions     : "android.arch.lifecycle:extensions:${archCompVersion}",
+            archCompiler       : "android.arch.lifecycle:compiler:${archCompVersion}",
+            lifecycle          : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
+            koinCore           : "org.koin:koin-core:${koin}",
+            koinTest           : "org.koin:koin-test:${koin}",
+            koinAndroid        : "org.koin:koin-android-viewmodel:${koin}",
+            koinAndroidx       : "org.koin:koin-androidx-scope:${koin}",
+            koinJava           : "org.koin:koin-java:${koin}",
+            multidex           : "androidx.multidex:multidex:${multidex}",
+            crashlytics        : "com.crashlytics.sdk.android:crashlytics:${crashlytics}",
+            navigationFragment : "androidx.navigation:navigation-fragment-ktx:${navigation}",
+            navigationUi       : "androidx.navigation:navigation-ui-ktx:${navigation}",
+            rxBinding          : "com.jakewharton.rxbinding2:rxbinding-kotlin:${rxAndroidVersion}",
+            cardView           : "androidx.cardview:cardview:${androidx}",
+            roomRuntime        : "androidx.room:room-runtime:${roomVersion}",
+            roomCompiler       : "androidx.room:room-compiler:${roomVersion}",
+            roomRx             : "androidx.room:room-rxjava2:${roomVersion}",
+            playServicesVision : "com.google.android.gms:play-services-vision:${playServicesVision}",
+            picasso            : "com.squareup.picasso:picasso:${picasso}",
+            threetenabp        : "com.jakewharton.threetenabp:threetenabp:${threetenabp}",
+            leakcanary         : "com.squareup.leakcanary:leakcanary-android:${leakcanary}",
+            fcm                : "com.google.firebase:firebase-messaging:${fcm}",
+            lifecycleViewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleViewModel}",
+            ktx                : "androidx.core:core-ktx:${ktx}"
+    ]
+    appTestDependencies = [
+            junit      : "junit:junit:${jUnitVersion}",
+            kotlinJUnit: "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
+            assertj    : "org.assertj:assertj-core:${assertJVersion}",
+            mockito    : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+            testRules  : "com.android.support.test:rules:${testRulesVersion}"
+    ]
+}
