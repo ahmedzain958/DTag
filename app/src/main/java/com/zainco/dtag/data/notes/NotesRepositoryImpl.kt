@@ -75,17 +75,25 @@ class NotesRepositoryImpl(
     }
 
     override fun updateNote(note: Note) {
-        charactersDisposable = notesLocalDataSource.update(note).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-            }
+        if (isUserLoggedIn()) {
+            notesRemoteDataSource.updateNote(note)
+        } else {
+            charactersDisposable = notesLocalDataSource.update(note).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                }
+        }
     }
 
     override fun deleteNote(note: Note) {
-        charactersDisposable = notesLocalDataSource.delete(note).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-            }
+        if (isUserLoggedIn()) {
+            notesRemoteDataSource.deleteNote(note)
+        } else {
+            charactersDisposable = notesLocalDataSource.delete(note).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                }
+        }
     }
 
     override fun deleteAllNotes() {

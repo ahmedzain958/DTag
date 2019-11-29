@@ -20,19 +20,19 @@ class AddNoteViewModel(
         get() = status
 
     fun onSaveClick(view: View) {
-        val note = Note(title!!, description!!)
+        val note = Note(title = title!!,description =  description!!)
         view.closeSoftKeyboard()
         repository.insertNote(note)
     }
 
     fun editNote(noteId: Int) {
-        val note = Note(title!!, description!!)
+        val note = Note(title = title!!,description =  description!!)
         note.id = noteId
         repository.updateNote(note)
     }
 
     fun onCancelClick() {
-        val note = Note(title!!, description!!)
+        val note = Note(title = title!!,description =  description!!)
         repository.insertNote(note)
     }
 }

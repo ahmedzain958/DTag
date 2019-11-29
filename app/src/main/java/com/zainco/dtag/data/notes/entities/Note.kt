@@ -6,7 +6,7 @@ import java.io.Serializable
 
 
 @Entity(tableName = "note_table")
-data class Note(var title: String="", var description: String="") : Serializable {
-    @PrimaryKey(autoGenerate = true)
-    var id = 0
+data class Note( @PrimaryKey(autoGenerate = true)
+                 var id:Int = 0,var title: String="", var description: String="") : Serializable {
+
 }

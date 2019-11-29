@@ -1,9 +1,11 @@
 package com.zainco.dtag.data.notes.remote
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.zainco.dtag.data.auth.FirebaseAuthDataSource
 import com.zainco.dtag.data.notes.entities.Note
 import com.zainco.dtag.data.notes.remote.RemoteConstants.NOTEBOOK_COLLECTION
@@ -21,9 +23,16 @@ class NotesRemoteDataSourceImpl(
     override fun insertNote(note: Note) {
         firebaseFirestore.collection(NOTEBOOK_COLLECTION).document(note.title)
             .set(note).addOnSuccessListener {
-
+                Log.d(
+                    "zzzzzz",
+                    note.title + "DocumentSnapshot successfully inserted!"
+                )
             }.addOnFailureListener {
+                Log.d(
+                    "zzzzzz",
+                    note.title + "Error inserted document "+it.message
 
+                )
             }
 
     }
@@ -49,5 +58,43 @@ class NotesRemoteDataSourceImpl(
                 }
             }
         return noteList
+    }
+
+    override fun deleteNote(note: Note) {
+        firebaseFirestore.collection(NOTEBOOK_COLLECTION).document(note.title)
+            .delete()
+            .addOnSuccessListener {
+                Log.d(
+                    "zzzzzz",
+                    note.title + "DocumentSnapshot successfully deleted!"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.d(
+                    "zzzzzz",
+                    note.title + "Error deleting document "+e.message
+
+                )
+            }
+
+    }
+
+    override fun updateNote(note: Note) {
+        firebaseFirestore.collection(NOTEBOOK_COLLECTION).document(note.title)
+            .set(note, SetOptions.merge())
+            .addOnSuccessListener {
+                Log.d(
+                    "zzzzzz",
+                    note.title + "DocumentSnapshot successfully deleted!"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.d(
+                    "zzzzzz",
+                    note.title + "Error deleting document",
+                    e
+                )
+            }
+
     }
 }
