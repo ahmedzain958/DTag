@@ -3,10 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     >
-
     <data>
         <variable name="viewmodel"
-            type="com.zainco.dtag.ui.fragment.login.LoginViewModel"/>
+            type="com.zainco.dtag.ui.auth.AuthViewModel"/>
     </data>
 
     <RelativeLayout android:layout_width="match_parent"
@@ -145,5 +144,6 @@
             android:layout_height="wrap_content"/>
 
     </RelativeLayout>
+
 
 </layout>

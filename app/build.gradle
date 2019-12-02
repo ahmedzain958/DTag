@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: "kotlin-kapt"
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -12,6 +13,7 @@ android {
         applicationId "com.zainco.dtag"
         minSdkVersion 17
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -74,10 +76,8 @@ dependencies {
     implementation appDependencies.fcm
     implementation appDependencies.ktx
     implementation appDependencies.lifecycleViewModel
-
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    implementation appDependencies.navigationFragment
+    implementation appDependencies.firebaseAuth
     kapt appDependencies.roomCompiler
     kapt appDependencies.archCompiler
     testImplementation appTestDependencies.junit

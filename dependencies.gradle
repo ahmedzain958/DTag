@@ -45,6 +45,7 @@ ext {
     threetenabp='1.1.0'
     leakcanary='2.0-beta-3'
     fcm ='20.0.0'
+    firebaseAuthVersion ='19.2.0'
     ktx ='1.1.0'
     appDependencies = [
             supportLibrary13   : "androidx.legacy:legacy-support-v13:${androidx}",
@@ -90,6 +91,7 @@ ext {
             leakcanary         : "com.squareup.leakcanary:leakcanary-android:${leakcanary}",
             fcm                : "com.google.firebase:firebase-messaging:${fcm}",
             lifecycleViewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleViewModel}",
+            firebaseAuth       : "com.google.firebase:firebase-auth:${firebaseAuthVersion}",
             ktx                : "androidx.core:core-ktx:${ktx}"
     ]
     appTestDependencies = [

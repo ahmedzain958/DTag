@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DTag</string>
+    <string name="error_format_invalid">Format is invalid</string>
+    <string name="error_too_short">Too short</string>
+    <string name="new_user_signup">New User Signup</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="email_hint">john@gmail.com</string>
 </resources>
