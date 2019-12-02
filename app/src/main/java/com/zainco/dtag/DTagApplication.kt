@@ -5,6 +5,6 @@ import android.app.Application
 class DTagApplication:Application() {
     override fun onCreate() {
         super.onCreate()
-
+        start(this)
     }
 }

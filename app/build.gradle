@@ -60,9 +60,6 @@ dependencies {
     implementation appDependencies.koinJava
     implementation appDependencies.rxBinding
     implementation appDependencies.multidex
-    implementation(appDependencies.crashlytics) {
-        transitive = true
-    }
     implementation appDependencies.constraintlayout
     implementation appDependencies.navigationUi
     implementation appDependencies.navigationFragment

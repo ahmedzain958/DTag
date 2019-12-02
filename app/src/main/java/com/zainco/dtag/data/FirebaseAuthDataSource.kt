@@ -1,12 +1,9 @@
-package com.zainco.dtag.data.firebase.auth
+package com.zainco.dtag.data
 
 import com.google.firebase.auth.FirebaseAuth
 import io.reactivex.Completable
 
-class FirebaseAuthDataSource {
-    private val firebaseAuth: FirebaseAuth by lazy {
-        FirebaseAuth.getInstance()
-    }
+class FirebaseAuthDataSource(private val firebaseAuth: FirebaseAuth) {
 
 
     fun login(email: String, password: String) = Completable.create { emitter ->

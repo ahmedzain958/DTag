@@ -1,13 +1,12 @@
 package com.zainco.dtag.ui.auth
 
 import com.leopold.mvvm.core.BaseViewModel
-import com.zainco.dtag.data.repository.AuthRepository
+import com.zainco.dtag.data.AuthRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class AuthViewModel(
     private val repository: AuthRepository
-
 ) : BaseViewModel() {
     var email: String? = null
     var password: String? = null
