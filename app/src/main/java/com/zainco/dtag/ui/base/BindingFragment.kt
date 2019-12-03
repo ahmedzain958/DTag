@@ -17,7 +17,6 @@ abstract class BindingFragment<T : ViewDataBinding> : Fragment() {
     protected lateinit var binding: T
         private set
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -79,7 +79,6 @@
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="@dimen/padding_10dp"
                 android:hint="@string/email_hint"
-
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
