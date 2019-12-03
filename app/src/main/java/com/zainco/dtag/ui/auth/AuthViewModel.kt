@@ -11,7 +11,8 @@ class AuthViewModel(
     var email: String? = null
     var password: String? = null
     var authListener: AuthListener? = null
-
+    val loading = repository.loading
+    val errorMsg = repository.errorLiveData
     fun login() {
         //validating email and password
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {

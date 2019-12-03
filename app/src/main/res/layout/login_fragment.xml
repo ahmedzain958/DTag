@@ -108,7 +108,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/lbl_password" />
-<!--            android:text="@={viewmodel.password}"-->
+            <!--            android:text="@={viewmodel.password}"-->
 
 
             <Button
@@ -139,11 +139,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_sign_in" />
-<!--android:onClick="@{(v) -> viewmodel.goToSignup(v)}"-->
+            <!--android:onClick="@{(v) -> viewmodel.goToSignup(v)}"-->
             <ProgressBar
                 android:id="@+id/progressbar"
                 android:layout_width="@dimen/width_32dp"
                 android:layout_height="@dimen/height_32dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
