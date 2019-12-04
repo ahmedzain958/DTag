@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 apply plugin: "kotlin-kapt"
-
+apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
@@ -76,9 +76,12 @@ dependencies {
     implementation appDependencies.navigationFragment
     implementation appDependencies.firebaseAuth
     implementation appDependencies.reactivestreams
-   /* implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    /* implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'*/
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
     kapt appDependencies.roomCompiler
     kapt appDependencies.archCompiler
     testImplementation appTestDependencies.junit

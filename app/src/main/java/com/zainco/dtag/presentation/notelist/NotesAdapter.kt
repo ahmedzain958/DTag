@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui.notes
+package com.zainco.dtag.presentation.notelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.zainco.dtag.R
 import com.zainco.dtag.data.notes.entities.Note
+
 
 typealias ClickListener = (Note) -> Unit
 
@@ -29,10 +30,12 @@ class NotesAdapter(
         val note = noteList[position]
         holder.title.text = note.title
         holder.desc.text = note.description
-        holder.priority.text = note.priority.toString()
     }
 
     override fun getItemCount() = noteList.size
+    fun getNoteAt(position: Int): Note? {
+        return noteList[position]
+    }
 
     fun updateNotes(noteList: List<Note>) {
         val diffResult = DiffUtil.calculateDiff(NoteDiffCallback(this.noteList, noteList))
@@ -43,7 +46,6 @@ class NotesAdapter(
     class NotesViewHolder(itemViewGroup: ViewGroup) : RecyclerView.ViewHolder(itemViewGroup) {
         val title: TextView = itemViewGroup.findViewById(R.id.text_view_title)
         val desc: TextView = itemViewGroup.findViewById(R.id.text_view_description)
-        val priority: TextView = itemViewGroup.findViewById(R.id.text_view_priority)
     }
 
 }

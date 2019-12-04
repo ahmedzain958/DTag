@@ -1,9 +1,7 @@
-package com.zainco.dtag.ui.notes
+package com.zainco.dtag.presentation.notelist
 
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.RecyclerView
 import com.leopold.mvvm.core.BaseViewModel
 import com.zainco.dtag.data.notes.NotesRepository
 import com.zainco.dtag.data.notes.entities.Note
@@ -14,8 +12,6 @@ import io.reactivex.schedulers.Schedulers
 class NotesViewModel(
     private val repository: NotesRepository
 ) : BaseViewModel() {
-    var title: String? = null
-    var description: String? = null
     val loading = repository.loading
     val errorMsg = repository.errorLiveData
     val error = MutableLiveData<Boolean>()
@@ -30,36 +26,7 @@ class NotesViewModel(
         }
     }
 
-   /* companion object {
-        @BindingAdapter(value = ["list", "viewModel"])
-        @JvmStatic
-        fun setList(
-            view: RecyclerView,
-            listModel: LiveData<List<Note>>,
-            viewModel: NotesViewModel?
-        ) {
-            if (listModel == null) return
-            if (view.adapter != null) {
-                if (view.adapter is NotesAdapter) {
-                    val adapter = view.adapter as NotesAdapter
-                    adapter.setNotes(listModel.value)
-                    adapter.notifyDataSetChanged()
-                }
-            } else {
-                val adapter = NotesAdapter(listModel.list.toMutableList(), viewModel!!)
-                view.adapter = adapter
-            }
-        }
-    }*/
 
-    fun onSaveClick() {
-        val note = Note(title!!, description!!, 1)
-        insert(note)
-    }
-
-    fun insert(note: Note) {
-        repository.insertNote(note)
-    }
 
     fun update(note: Note) {
         addToDisposable(

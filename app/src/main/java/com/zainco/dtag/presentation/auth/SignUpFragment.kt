@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui.auth
+package com.zainco.dtag.presentation.auth
 
 import android.os.Bundle
 import android.widget.Toast
@@ -8,8 +8,8 @@ import androidx.navigation.findNavController
 import com.zainco.dtag.R
 import com.zainco.dtag.databinding.SignUpFragmentBinding
 import com.zainco.dtag.extension.toast
-import com.zainco.dtag.ui.auth.validations.AuthFields
-import com.zainco.dtag.ui.base.BindingFragment
+import com.zainco.dtag.presentation.auth.validations.AuthFields
+import com.zainco.dtag.presentation.base.BindingFragment
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 

@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.zainco.dtag.ui.auth.AuthViewModel" />
+            type="com.zainco.dtag.presentation.auth.AuthViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

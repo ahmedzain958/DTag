@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui.auth
+package com.zainco.dtag.presentation.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

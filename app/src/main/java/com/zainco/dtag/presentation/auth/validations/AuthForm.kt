@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui.auth.validations
+package com.zainco.dtag.presentation.auth.validations
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable

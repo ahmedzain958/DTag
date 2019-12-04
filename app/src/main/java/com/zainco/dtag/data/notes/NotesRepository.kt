@@ -9,10 +9,7 @@ interface NotesRepository {
     val noteLiveData: LiveData<List<Note>>
     fun getAllNotes()
     fun insertNote(note: Note)
-
     fun updateNote(note: Note)
-
     fun deleteNote(note: Note)
-
     fun deleteAllNotes()
 }

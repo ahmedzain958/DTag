@@ -7,7 +7,8 @@ import com.zainco.dtag.data.notes.local.LocalConstants.NOTE_DATABASE
 import com.zainco.dtag.data.notes.local.NoteDatabase
 import com.zainco.dtag.data.notes.local.NotesLocalDataSource
 import com.zainco.dtag.data.notes.local.NotesLocalDataSourceImpl
-import com.zainco.dtag.ui.notes.NotesViewModelFactory
+import com.zainco.dtag.presentation.addnote.AddNoteViewModelFactory
+import com.zainco.dtag.presentation.notelist.NotesViewModelFactory
 import org.koin.dsl.module.module
 
 
@@ -22,5 +23,6 @@ val notesModule = module {
     factory<NotesLocalDataSource> { NotesLocalDataSourceImpl(get()) }
     factory<NotesRepository> { NotesRepositoryImpl(get()) }
     factory { NotesViewModelFactory(get()) }
+    factory { AddNoteViewModelFactory(get()) }
 
 }

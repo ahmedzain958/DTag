@@ -7,14 +7,14 @@
 
         <variable
             name="viewmodel"
-            type="com.zainco.dtag.ui.auth.AuthViewModel" />
+            type="com.zainco.dtag.presentation.auth.AuthViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
-        tools:context="com.zainco.dtag.ui.auth.SignUpFragment">
+        tools:context="com.zainco.dtag.presentation.auth.SignUpFragment">
 
 
         <TextView

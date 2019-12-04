@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui.base
+package com.zainco.dtag.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

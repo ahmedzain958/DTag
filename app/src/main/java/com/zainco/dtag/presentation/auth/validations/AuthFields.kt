@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui.auth.validations
+package com.zainco.dtag.presentation.auth.validations
 
 class AuthFields {
     var email: String? = null

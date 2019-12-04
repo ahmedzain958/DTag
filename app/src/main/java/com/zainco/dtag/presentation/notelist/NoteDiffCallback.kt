@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui.notes
+package com.zainco.dtag.presentation.notelist
 
 import androidx.recyclerview.widget.DiffUtil
 import com.zainco.dtag.data.notes.entities.Note

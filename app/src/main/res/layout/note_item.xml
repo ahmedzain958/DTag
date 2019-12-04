@@ -8,7 +8,7 @@
             type="com.zainco.dtag.data.notes.entities.Note" />
         <variable
             name="viewModel"
-            type="com.zainco.dtag.ui.notes.NotesViewModel" />
+            type="com.zainco.dtag.presentation.notelist.NotesViewModel" />
 
 
 

@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui.auth
+package com.zainco.dtag.presentation.auth
 
 import android.os.Bundle
 import android.widget.Toast
@@ -8,8 +8,8 @@ import androidx.navigation.findNavController
 import com.zainco.dtag.R
 import com.zainco.dtag.databinding.LoginFragmentBinding
 import com.zainco.dtag.extension.toast
-import com.zainco.dtag.ui.auth.validations.AuthFields
-import com.zainco.dtag.ui.base.BindingFragment
+import com.zainco.dtag.presentation.auth.validations.AuthFields
+import com.zainco.dtag.presentation.base.BindingFragment
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
@@ -25,7 +25,6 @@ class LoginFragment : BindingFragment<LoginFragmentBinding>(), AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AuthViewModel::class.java)
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -49,9 +48,10 @@ class LoginFragment : BindingFragment<LoginFragmentBinding>(), AuthListener {
     override fun onStart() {
         super.onStart()
         if (viewModel.isUserLoggedIn()) {
-            view?.findNavController()?.navigate(R.id.action_signUpFragment_to_loginFragment)
+            view?.findNavController()?.navigate(R.id.action_loginFragment_to_notesListFragment)
         }
     }
+
     override fun onSuccess() {
         view?.findNavController()?.navigate(R.id.action_loginFragment_to_notesListFragment)
     }

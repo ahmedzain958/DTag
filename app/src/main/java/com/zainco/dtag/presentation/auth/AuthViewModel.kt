@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui.auth
+package com.zainco.dtag.presentation.auth
 
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
@@ -6,8 +6,8 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import com.leopold.mvvm.core.BaseViewModel
 import com.zainco.dtag.data.auth.AuthRepository
-import com.zainco.dtag.ui.auth.validations.AuthFields
-import com.zainco.dtag.ui.auth.validations.AuthForm
+import com.zainco.dtag.presentation.auth.validations.AuthFields
+import com.zainco.dtag.presentation.auth.validations.AuthForm
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

@@ -1,4 +1,4 @@
-package com.zainco.dtag.ui
+package com.zainco.dtag.presentation
 
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -6,7 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.zainco.dtag.R
 import com.zainco.dtag.databinding.ActivityMainBinding
-import com.zainco.dtag.ui.base.BindingActivity
+import com.zainco.dtag.presentation.base.BindingActivity
 
 class MainActivity : BindingActivity<ActivityMainBinding>() {
     private lateinit var navController: NavController
