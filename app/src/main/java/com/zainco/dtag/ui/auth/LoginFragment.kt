@@ -25,9 +25,7 @@ class LoginFragment : BindingFragment<LoginFragmentBinding>(), AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AuthViewModel::class.java)
-        if (viewModel.isUserLoggedIn()) {
-            view?.findNavController()?.navigate(R.id.action_signUpFragment_to_loginFragment)
-        }
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -48,6 +46,12 @@ class LoginFragment : BindingFragment<LoginFragmentBinding>(), AuthListener {
         viewModel.authListener = this
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (viewModel.isUserLoggedIn()) {
+            view?.findNavController()?.navigate(R.id.action_signUpFragment_to_loginFragment)
+        }
+    }
     override fun onSuccess() {
         view?.findNavController()?.navigate(R.id.action_loginFragment_to_notesListFragment)
     }
