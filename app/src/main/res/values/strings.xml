@@ -11,4 +11,11 @@
     <string name="account_login">Account Login</string>
     <string name="log_in">Log in</string>
     <string name="dont_have_an_account_register_here">Don\'t have an account. Register Here</string>
+    <string name="notes_not_found">No notes found</string>
+    <string name="edit_note_button_text">Edit</string>
+    <string name="edit_note_hint">edit note</string>
+    <string name="delete_note_button_text">Delete</string>
+    <string name="cancel_delete_button_text">Cancel</string>
+    <string name="confirm_delete_button_text">Confirm Delete</string>
+    <string name="error_deleting_note">Error deleting note</string>
 </resources>

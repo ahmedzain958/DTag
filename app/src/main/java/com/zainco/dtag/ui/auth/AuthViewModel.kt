@@ -5,9 +5,9 @@ import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import com.leopold.mvvm.core.BaseViewModel
-import com.zainco.dtag.data.AuthRepository
-import com.zainco.dtag.ui.auth.model.AuthFields
-import com.zainco.dtag.ui.auth.model.AuthForm
+import com.zainco.dtag.data.auth.AuthRepository
+import com.zainco.dtag.ui.auth.validations.AuthFields
+import com.zainco.dtag.ui.auth.validations.AuthForm
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -15,7 +15,7 @@ class AuthViewModel(
     private val repository: AuthRepository
 ) : BaseViewModel() {
     var authListener: AuthListener? = null
-      var auth: AuthForm = AuthForm()
+    var auth: AuthForm = AuthForm()
 
     private var onFocusEmail: OnFocusChangeListener
     private var onFocusPassword: OnFocusChangeListener
@@ -43,30 +43,19 @@ class AuthViewModel(
         return onFocusPassword
     }
 
+    fun isUserLoggedIn(): Boolean = repository.currentUser() == null
 
-    fun login() {
-        //validating email and password
-      /*  if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            authListener?.onFailure("Invalid email or password")
-            return
-        }
-
-        //authentication started
-        authListener?.onStarted()
-
-        //calling login from repository to perform the actual authentication
+    fun login(email: String?, password: String?) {
         addToDisposable(
             repository.login(email!!, password!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    //sending a success callback
                     authListener?.onSuccess()
                 }, {
-                    //sending a failure callback
                     authListener?.onFailure(it.message!!)
                 })
-        )*/
+        )
     }
 
     fun signup(email: String?, password: String?) {
@@ -81,9 +70,11 @@ class AuthViewModel(
                 })
         )
     }
+
     fun getLoginFields(): MutableLiveData<AuthFields> {
         return auth.authFields
     }
+
     fun onButtonClick() {
         auth.onClick()
     }

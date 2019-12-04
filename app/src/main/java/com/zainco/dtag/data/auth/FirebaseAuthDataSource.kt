@@ -1,4 +1,4 @@
-package com.zainco.dtag.data
+package com.zainco.dtag.data.auth
 
 import androidx.lifecycle.LiveData
 import com.google.firebase.auth.FirebaseUser

@@ -1,12 +1,12 @@
-package com.zainco.dtag.data
+package com.zainco.dtag.data.auth
 
 import com.google.firebase.auth.FirebaseAuth
+import com.zainco.dtag.data.auth.FirebaseAuthDataSource
 import io.reactivex.Completable
 
 class FirebaseAuthDataSourceImpl(
     private val firebaseAuth: FirebaseAuth
 ) : FirebaseAuthDataSource {
-
 
     override fun login(email: String, password: String) = Completable.create { emitter ->
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {

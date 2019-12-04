@@ -5,6 +5,7 @@
     android:id="@+id/main_navigation"
     app:startDestination="@id/loginFragment">
 
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.zainco.dtag.ui.auth.LoginFragment"
@@ -12,17 +13,29 @@
         tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
-            app:popUpToInclusive="true"
-            app:destination="@+id/signUpFragment" />
+            app:destination="@+id/signUpFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_notesListFragment"
+            app:destination="@id/notesListFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.zainco.dtag.ui.auth.SignUpFragment"
         android:label="Sign Up"
-        tools:layout="@layout/sign_up_fragment" >
+        tools:layout="@layout/sign_up_fragment">
         <action
-            app:popUpTo="@+id/main_navigation"
             android:id="@+id/action_signUpFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@+id/main_navigation" />
+        <action
+            android:id="@+id/action_signUpFragment_to_notesListFragment"
+            app:destination="@id/notesListFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/notesListFragment"
+        android:name="com.zainco.dtag.ui.notes.NotesListFragment"
+        android:label="NotesListFragment" />
+
 </navigation>

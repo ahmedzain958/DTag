@@ -1,4 +1,4 @@
-package com.zainco.dtag.data
+package com.zainco.dtag.data.auth
 
 class AuthRepositoryImpl(private val firebaseAuthDataSource: FirebaseAuthDataSource) :
     AuthRepository {

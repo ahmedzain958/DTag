@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import com.zainco.dtag.R
 import com.zainco.dtag.databinding.SignUpFragmentBinding
 import com.zainco.dtag.extension.toast
-import com.zainco.dtag.ui.auth.model.AuthFields
+import com.zainco.dtag.ui.auth.validations.AuthFields
 import com.zainco.dtag.ui.base.BindingFragment
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -36,12 +36,12 @@ class SignUpFragment : BindingFragment<SignUpFragmentBinding>(), AuthListener {
         binding.textViewLogin.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_signUpFragment_to_loginFragment)
         }
+        viewModel.authListener = this
     }
 
 
     override fun onSuccess() {
-
-
+        view?.findNavController()?.navigate(R.id.action_signUpFragment_to_notesListFragment)
     }
 
     override fun onFailure(message: String) {

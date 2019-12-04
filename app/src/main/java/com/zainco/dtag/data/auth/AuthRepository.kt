@@ -1,4 +1,4 @@
-package com.zainco.dtag.data
+package com.zainco.dtag.data.auth
 
 import com.google.firebase.auth.FirebaseUser
 import io.reactivex.Completable

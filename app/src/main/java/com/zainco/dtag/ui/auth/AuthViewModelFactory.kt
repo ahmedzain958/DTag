@@ -2,7 +2,7 @@ package com.zainco.dtag.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.zainco.dtag.data.AuthRepository
+import com.zainco.dtag.data.auth.AuthRepository
 
 class AuthViewModelFactory(
     private val authRepository: AuthRepository
