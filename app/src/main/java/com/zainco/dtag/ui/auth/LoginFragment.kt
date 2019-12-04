@@ -22,6 +22,7 @@ class LoginFragment : BindingFragment<LoginFragmentBinding>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this,viewModelFactory).get(AuthViewModel::class.java)
+        binding.viewmodel = viewModel
         binding.textViewSignup.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_loginFragment_to_signUpFragment)
         }

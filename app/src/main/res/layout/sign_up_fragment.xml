@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
-        tools:context="com.zainco.dtag.ui.auth.SignUpFragment"
-        >
+        tools:context="com.zainco.dtag.ui.auth.SignUpFragment">
 
 
         <TextView
@@ -84,8 +83,8 @@
                 android:hint="@string/email_hint"
                 android:inputType="textNoSuggestions|textEmailAddress"
                 android:singleLine="true"
-                android:text="@={viewmodel.login.fields.email}"
-                app:error="@{viewmodel.login.emailError}"
+                android:text="@={viewmodel.auth.fields.email}"
+                app:error="@{viewmodel.auth.emailError}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/lbl_email"
@@ -110,8 +109,8 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:singleLine="true"
-                android:text="@={viewmodel.login.fields.password}"
-                app:error="@{viewmodel.login.passwordError}"
+                android:text="@={viewmodel.auth.fields.password}"
+                app:error="@{viewmodel.auth.passwordError}"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_22dp"
                 android:background="@color/colorPrimary"
-                android:enabled="@{viewmodel.login.valid}"
+                android:enabled="@{viewmodel.auth.valid}"
                 android:onClick="@{() -> viewmodel.onButtonClick()}"
                 android:text="@string/sign_up"
                 android:textAllCaps="false"
@@ -141,14 +140,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_24dp"
-
                 android:text="@string/already_have_an_account_login_here"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_sign_up" />
-            <!--  android:onClick="@{(v) -> viewmodel.goToLogin(v)}"-->
             <ProgressBar
                 android:id="@+id/progressbar"
                 android:layout_width="@dimen/width_32dp"

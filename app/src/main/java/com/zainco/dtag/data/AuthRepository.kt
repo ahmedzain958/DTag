@@ -1,13 +1,9 @@
 package com.zainco.dtag.data
 
-import androidx.lifecycle.LiveData
 import com.google.firebase.auth.FirebaseUser
 import io.reactivex.Completable
 
 interface AuthRepository {
-    val errorLiveData: LiveData<String>
-
-    val loading: LiveData<Boolean>
 
     fun login(email: String, password: String): Completable
 

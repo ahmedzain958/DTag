@@ -6,16 +6,16 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import com.leopold.mvvm.core.BaseViewModel
 import com.zainco.dtag.data.AuthRepository
-import com.zainco.dtag.ui.auth.model.LoginFields
-import com.zainco.dtag.ui.auth.model.LoginForm
+import com.zainco.dtag.ui.auth.model.AuthFields
+import com.zainco.dtag.ui.auth.model.AuthForm
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class AuthViewModel(
     private val repository: AuthRepository
 ) : BaseViewModel() {
     var authListener: AuthListener? = null
-    val loading = repository.loading
-    val errorMsg = repository.errorLiveData
-      var login: LoginForm = LoginForm()
+      var auth: AuthForm = AuthForm()
 
     private var onFocusEmail: OnFocusChangeListener
     private var onFocusPassword: OnFocusChangeListener
@@ -24,13 +24,13 @@ class AuthViewModel(
         onFocusEmail = OnFocusChangeListener { view, focused ->
             val et = view as EditText
             if (et.text.isNotEmpty() && !focused) {
-                login.isEmailValid(true)
+                auth.isEmailValid(true)
             }
         }
         onFocusPassword = OnFocusChangeListener { view, focused ->
             val et = view as EditText
             if (et.text.isNotEmpty() && !focused) {
-                login.isPasswordValid(true)
+                auth.isPasswordValid(true)
             }
         }
     }
@@ -69,12 +69,7 @@ class AuthViewModel(
         )*/
     }
 
-    fun signup() {
-      /*  if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            authListener?.onFailure("Please input all values")
-            return
-        }
-        authListener?.onStarted()
+    fun signup(email: String?, password: String?) {
         addToDisposable(
             repository.register(email!!, password!!)
                 .subscribeOn(Schedulers.io())
@@ -84,13 +79,13 @@ class AuthViewModel(
                 }, {
                     authListener?.onFailure(it.message!!)
                 })
-        )*/
+        )
     }
-    fun getLoginFields(): MutableLiveData<LoginFields> {
-        return login.loginFields
+    fun getLoginFields(): MutableLiveData<AuthFields> {
+        return auth.authFields
     }
     fun onButtonClick() {
-        login.onClick()
+        auth.onClick()
     }
 
     companion object {

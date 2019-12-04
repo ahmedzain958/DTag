@@ -79,12 +79,16 @@
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="@dimen/padding_10dp"
                 android:hint="@string/email_hint"
-                android:inputType="textEmailAddress"
+                android:inputType="textNoSuggestions|textEmailAddress"
                 android:singleLine="true"
+                android:text="@={viewmodel.auth.fields.email}"
+                app:error="@{viewmodel.auth.emailError}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lbl_email" />
-            <!--android:text="@={viewmodel.email}"-->
+                app:layout_constraintTop_toBottomOf="@id/lbl_email"
+                app:onFocus="@{viewmodel.getEmailOnFocusChangeListener()}" />
+
+
             <TextView
                 android:id="@+id/lbl_password"
                 android:layout_width="wrap_content"
@@ -104,10 +108,12 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:singleLine="true"
+                android:text="@={viewmodel.auth.fields.password}"
+                app:error="@{viewmodel.auth.passwordError}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lbl_password" />
-            <!--            android:text="@={viewmodel.password}"-->
+                app:layout_constraintTop_toBottomOf="@id/lbl_password"
+                app:onFocus="@{viewmodel.getPasswordOnFocusChangeListener()}" />
 
 
             <Button
@@ -116,7 +122,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_22dp"
                 android:background="@color/colorPrimary"
-                android:onClick="@{() -> viewmodel.login()}"
+                android:enabled="@{viewmodel.auth.valid}"
+                android:onClick="@{() -> viewmodel.onButtonClick()}"
                 android:text="@string/log_in"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
@@ -138,7 +145,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_sign_in" />
-            <!--android:onClick="@{(v) -> viewmodel.goToSignup(v)}"-->
+
             <ProgressBar
                 android:id="@+id/progressbar"
                 android:layout_width="@dimen/width_32dp"

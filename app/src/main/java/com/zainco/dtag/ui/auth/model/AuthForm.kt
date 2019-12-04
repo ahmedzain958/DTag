@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import com.zainco.dtag.BR
 import com.zainco.dtag.R
 
-class LoginForm : BaseObservable() {
-    val fields = LoginFields()
-    private val errors = LoginErrorFields()
-    val loginFields = MutableLiveData<LoginFields>()
+class AuthForm : BaseObservable() {
+    val fields = AuthFields()
+    private val errors = AuthErrorFields()
+    val authFields = MutableLiveData<AuthFields>()
     @get:Bindable
     val isValid: Boolean
         get() {
@@ -25,7 +25,7 @@ class LoginForm : BaseObservable() {
         if (email != null && email.length > 5) {
             val indexOfAt = email.indexOf("@")
             val indexOfDot = email.lastIndexOf(".")
-            return if (indexOfAt > 0 && indexOfDot > indexOfAt && indexOfDot < email.length - 1) {
+            return if (indexOfAt in 1 until indexOfDot && indexOfDot < email.length - 1) {
                 errors.email = null
                 notifyPropertyChanged(BR.valid)
                 true
@@ -61,7 +61,8 @@ class LoginForm : BaseObservable() {
 
     fun onClick() {
         if (isValid) {
-            loginFields.value = fields
+            //once authFields changed consequently the livedata will observe its change in the fragment
+            authFields.value = fields
         }
     }
 
