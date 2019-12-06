@@ -1,5 +1,6 @@
 package com.zainco.dtag.data.notes.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import com.zainco.dtag.data.notes.entities.Note
@@ -22,5 +23,5 @@ interface NoteDao {
     fun deleteAllNotes(): Completable
 
     @Query("SELECT * FROM note_table ORDER BY id")
-    fun getAllNotes(): Single<List<Note>>
+    fun getAllNotes(): LiveData<List<Note>>
 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "142054809648",
+    "firebase_url": "https://dtag-c48ca.firebaseio.com",
+    "project_id": "dtag-c48ca",
+    "storage_bucket": "dtag-c48ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142054809648:android:1a5dd074c23f27c00ccdf5",
+        "android_client_info": {
+          "package_name": "com.zainco.dtag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142054809648-dcei7r0t6icce1h7bfcedgga1mbkfeui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zainco.dtag",
+            "certificate_hash": "919449c28ec999bdacf8e2582c2b14fc2b279a7c"
+          }
+        },
+        {
+          "client_id": "142054809648-j81ceoc12oe6omaphd73ktfodmojqrmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXXNVxb2CZiP18dy6N-3DtuKNoOT1PsXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142054809648-j81ceoc12oe6omaphd73ktfodmojqrmb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

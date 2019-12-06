@@ -18,9 +18,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
         navController = findNavController(R.id.nav_host_fragment)
         setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(navController)
-
+//        setupActionBarWithNavController(navController)
     }
 
-    override fun onSupportNavigateUp(): Boolean = navController.navigateUp()
+//    override fun onSupportNavigateUp(): Boolean = navController.navigateUp()
 }

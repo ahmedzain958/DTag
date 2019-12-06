@@ -2,15 +2,16 @@ package com.zainco.dtag.data.notes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.leopold.mvvm.extension.with
 import com.zainco.dtag.data.notes.entities.Note
 import com.zainco.dtag.data.notes.local.NotesLocalDataSource
+import com.zainco.dtag.data.notes.remote.NotesRemoteDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class NotesRepositoryImpl(
-    private val notesLocalDataSource: NotesLocalDataSource
+    private val notesLocalDataSource: NotesLocalDataSource,
+    private val notesRemoteDataSource: NotesRemoteDataSource
 ) : NotesRepository {
 
     private var charactersDisposable: Disposable? = null
@@ -35,32 +36,42 @@ class NotesRepositoryImpl(
         }
     }
 
-    override fun getAllNotes() {
-        charactersDisposable = notesLocalDataSource.getNotes().with()
-            .subscribe({
-                _notesListLiveData.value = it
-            }, { throwable ->
-                when (throwable) {
+    private fun isUserLoggedIn(): Boolean {
+        return notesRemoteDataSource.currentUser() != null
+    }
 
-                }
-            })
+    override fun getAllNotes() {
+        if (isUserLoggedIn()) {
+            notesRemoteDataSource.getNotes().observeForever {
+                _notesListLiveData.postValue(it)
+            }
+        } else {
+            notesLocalDataSource.getNotes().observeForever {
+                _notesListLiveData.postValue(it)
+            }
+        }
+
     }
 
 
     override fun insertNote(note: Note) {
-        charactersDisposable =
-            notesLocalDataSource.insert(note).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    {
-                        //inserted
-                    },
-                    { throwable ->
-                        when (throwable) {
+        if (isUserLoggedIn()) {
+            notesRemoteDataSource.insertNote(note)
+        } else {
+            charactersDisposable =
+                notesLocalDataSource.insert(note).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        {
+                            //inserted
+                        },
+                        { throwable ->
+                            when (throwable) {
 
+                            }
                         }
-                    }
-                )
+                    )
+        }
     }
 
     override fun updateNote(note: Note) {

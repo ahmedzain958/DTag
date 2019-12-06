@@ -2,9 +2,9 @@ package com.zainco.dtag.presentation.notelist
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +40,10 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
         binding.fab.setOnClickListener {
             view.findNavController().navigate(R.id.action_notesListFragment_to_addNoteFragment)
         }
+        onSwipe()
+    }
+
+    fun onSwipe() {
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -58,10 +62,6 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
             }
         }).attachToRecyclerView(binding.notesRecyclerView)
     }
-    /* override fun onActivityCreated(savedInstanceState: Bundle?) {
-         super.onActivityCreated(savedInstanceState)
-
-     }*/
 
     override fun onResume() {
         super.onResume()
@@ -81,7 +81,14 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
 
     private fun onNoteClicked(note: Note) {
         view?.findNavController()
-            ?.navigate(NotesListFragmentDirections.actionNotesListFragmentToAddNoteFragment(note))
+            ?.navigate(
+                NotesListFragmentDirections.actionNotesListFragmentToAddNoteFragment(note),
+                NavOptions.Builder()
+                    .setPopUpTo(
+                        R.id.notesListFragment,
+                        true
+                    ).build()
+            )
     }
 
     private fun setupRecyclerView() {

@@ -27,7 +27,6 @@ class NotesViewModel(
     }
 
 
-
     fun update(note: Note) {
         addToDisposable(
             Observable.fromCallable { repository.updateNote(note) }
@@ -54,7 +53,7 @@ class NotesViewModel(
 
     fun loadNotes() {
         repository.getAllNotes()
-        noteList.value =repository.noteLiveData.value
+        noteList.postValue(repository.noteLiveData.value)
     }
 
 }

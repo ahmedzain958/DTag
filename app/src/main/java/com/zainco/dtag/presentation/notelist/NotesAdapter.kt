@@ -36,7 +36,6 @@ class NotesAdapter(
     fun getNoteAt(position: Int): Note? {
         return noteList[position]
     }
-
     fun updateNotes(noteList: List<Note>) {
         val diffResult = DiffUtil.calculateDiff(NoteDiffCallback(this.noteList, noteList))
         this.noteList = noteList

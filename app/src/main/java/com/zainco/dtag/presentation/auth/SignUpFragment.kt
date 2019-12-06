@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.zainco.dtag.R
 import com.zainco.dtag.databinding.SignUpFragmentBinding
@@ -41,7 +42,15 @@ class SignUpFragment : BindingFragment<SignUpFragmentBinding>(), AuthListener {
 
 
     override fun onSuccess() {
-        view?.findNavController()?.navigate(R.id.action_signUpFragment_to_notesListFragment)
+        view?.findNavController()?.navigate(
+            R.id.action_signUpFragment_to_notesListFragment,
+            null,
+            NavOptions.Builder()
+                .setPopUpTo(
+                    R.id.signUpFragment,
+                    true
+                ).build()
+        )
     }
 
     override fun onFailure(message: String) {

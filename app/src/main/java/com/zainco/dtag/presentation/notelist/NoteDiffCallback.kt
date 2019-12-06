@@ -12,10 +12,11 @@ class NoteDiffCallback(
     override fun getNewListSize() = new.size
 
     override fun areItemsTheSame(oldIndex: Int, newIndex: Int): Boolean {
-        return old[oldIndex].title == new[newIndex].title
+        return old[oldIndex].id == new[newIndex].id
     }
 
     override fun areContentsTheSame(oldIndex: Int, newIndex: Int): Boolean {
-        return old[oldIndex] == new[newIndex]
+        return old[oldIndex].id == new[newIndex].id && old[oldIndex].title == new[newIndex].title
+                && old[oldIndex].description == new[newIndex].description
     }
 }

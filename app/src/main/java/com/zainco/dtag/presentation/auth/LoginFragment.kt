@@ -1,7 +1,6 @@
 package com.zainco.dtag.presentation.auth
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -32,21 +31,17 @@ class LoginFragment : BindingFragment<LoginFragmentBinding>(), AuthListener {
         binding.viewmodel = viewModel
         viewModel.getLoginFields().observe(this,
             Observer<AuthFields> { loginModel ->
-                Toast.makeText(
-                    context,
-                    "Email " + loginModel.email + ", Password " + loginModel.password,
-                    Toast.LENGTH_SHORT
-                ).show()
                 viewModel.login(loginModel.email, loginModel.password)
             })
         binding.textViewSignup.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_loginFragment_to_signUpFragment)
         }
         viewModel.authListener = this
+        checkIfUserLoggedIn()
+
     }
 
-    override fun onStart() {
-        super.onStart()
+    fun checkIfUserLoggedIn() {
         if (viewModel.isUserLoggedIn()) {
             view?.findNavController()?.navigate(R.id.action_loginFragment_to_notesListFragment)
         }

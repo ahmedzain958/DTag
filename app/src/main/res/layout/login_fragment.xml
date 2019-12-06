@@ -86,8 +86,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/lbl_email"
-                app:onFocus="@{viewmodel.getEmailOnFocusChangeListener()}" />
-
+                app:textChangedListener="@{viewmodel.auth.getEmailTextWatcher}" />
+            <!--  app:onFocus="@{viewmodel.getEmailOnFocusChangeListener()}"-->
 
             <TextView
                 android:id="@+id/lbl_password"
@@ -113,9 +113,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/lbl_password"
-                app:onFocus="@{viewmodel.getPasswordOnFocusChangeListener()}" />
+                app:textChangedListener="@{viewmodel.auth.getPasswordTextWatcher}" />
 
-
+            <!--  app:onFocus="@{viewmodel.getPasswordOnFocusChangeListener()}" -->
             <Button
                 android:id="@+id/button_sign_in"
                 android:layout_width="0dp"
@@ -138,10 +138,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_24dp"
-
                 android:text="@string/dont_have_an_account_register_here"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/colorRed"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button_sign_in" />

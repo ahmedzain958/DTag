@@ -18,7 +18,7 @@ class NotesLocalDataSourceImpl(
     override val errorLoading: LiveData<String>
         get() = _errorLoading
 
-    override fun getNotes(): Single<List<Note>> {
+    override fun getNotes(): LiveData<List<Note>> {
         return noteDao.getAllNotes()
     }
 

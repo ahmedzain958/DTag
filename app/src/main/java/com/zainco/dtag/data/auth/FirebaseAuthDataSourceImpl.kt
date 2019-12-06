@@ -1,7 +1,6 @@
 package com.zainco.dtag.data.auth
 
 import com.google.firebase.auth.FirebaseAuth
-import com.zainco.dtag.data.auth.FirebaseAuthDataSource
 import io.reactivex.Completable
 
 class FirebaseAuthDataSourceImpl(

@@ -9,7 +9,7 @@ import io.reactivex.Single
 interface NotesLocalDataSource {
     val errorLoading: LiveData<String>
     val loading: LiveData<Boolean>
-    fun getNotes(): Single<List<Note>>
+    fun getNotes(): LiveData<List<Note>>
     fun insert(note: Note): Completable
     fun update(note: Note): Completable
     fun delete(note: Note): Completable

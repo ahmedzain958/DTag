@@ -1,7 +1,9 @@
 package com.zainco.dtag.presentation.auth
 
+import android.text.TextWatcher
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
+import androidx.databinding.BaseObservable
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import com.leopold.mvvm.core.BaseViewModel
@@ -11,6 +13,7 @@ import com.zainco.dtag.presentation.auth.validations.AuthForm
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+
 class AuthViewModel(
     private val repository: AuthRepository
 ) : BaseViewModel() {
@@ -18,6 +21,7 @@ class AuthViewModel(
     var auth: AuthForm = AuthForm()
 
     private var onFocusEmail: OnFocusChangeListener
+
     private var onFocusPassword: OnFocusChangeListener
 
     init {
@@ -35,15 +39,18 @@ class AuthViewModel(
         }
     }
 
-    fun getEmailOnFocusChangeListener(): OnFocusChangeListener {
+
+   /* fun getEmailOnFocusChangeListener(): OnFocusChangeListener {
         return onFocusEmail
     }
 
     fun getPasswordOnFocusChangeListener(): OnFocusChangeListener {
         return onFocusPassword
-    }
+    }*/
 
-    fun isUserLoggedIn(): Boolean = repository.currentUser() == null
+    fun isUserLoggedIn(): Boolean {
+        return repository.currentUser() != null
+    }
 
     fun login(email: String?, password: String?) {
         addToDisposable(
@@ -99,6 +106,12 @@ class AuthViewModel(
             if (editText.onFocusChangeListener == null) {
                 editText.onFocusChangeListener = onFocusChangeListener
             }
+        }
+
+        @BindingAdapter("textChangedListener")
+        @JvmStatic
+        fun bindTextWatcher(editText: EditText, textWatcher: TextWatcher?) {
+            editText.addTextChangedListener(textWatcher)
         }
     }
 
