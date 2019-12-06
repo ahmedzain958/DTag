@@ -22,11 +22,8 @@ val notesModule = module {
     single {
         get<NoteDatabase>().noteDao()
     }
-      single {
-        get<NoteDatabase>().noteDao()
-    }
     factory<NotesLocalDataSource> { NotesLocalDataSourceImpl(get()) }
-    factory<NotesRemoteDataSource> { NotesRemoteDataSourceImpl(get()) }
+    factory<NotesRemoteDataSource> { NotesRemoteDataSourceImpl(get(),get()) }
     factory<NotesRepository> { NotesRepositoryImpl(get(),get()) }
     factory { NotesViewModelFactory(get()) }
     factory { AddNoteViewModelFactory(get()) }
