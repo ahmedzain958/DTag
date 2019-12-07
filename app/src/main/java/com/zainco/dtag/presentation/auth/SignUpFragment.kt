@@ -37,6 +37,9 @@ class SignUpFragment : BindingFragment<SignUpFragmentBinding>(), AuthListener {
         binding.textViewLogin.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_signUpFragment_to_loginFragment)
         }
+        binding.btnSkip.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_signUpFragment_to_notesListFragment)
+        }
         viewModel.authListener = this
     }
 

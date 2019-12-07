@@ -30,9 +30,4 @@ class AddNoteViewModel(
         note.id = noteId
         repository.updateNote(note)
     }
-
-    fun onCancelClick() {
-        val note = Note(title = title!!,description =  description!!)
-        repository.insertNote(note)
-    }
 }

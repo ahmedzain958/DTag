@@ -2,20 +2,23 @@ package com.zainco.dtag.presentation.addnote
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProviders
-import com.zainco.dtag.R
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.zainco.dtag.data.notes.entities.Note
 import com.zainco.dtag.databinding.FragmentAddNoteBinding
 import com.zainco.dtag.presentation.base.BindingFragment
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
+
 class AddNoteFragment : BindingFragment<FragmentAddNoteBinding>() {
 
     private val addNoteViewModelFactory: AddNoteViewModelFactory by inject { parametersOf(this) }
     private lateinit var viewModel: AddNoteViewModel
     override val layoutResId: Int
-        get() = R.layout.fragment_add_note
+        get() = com.zainco.dtag.R.layout.fragment_add_note
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -32,6 +35,10 @@ class AddNoteFragment : BindingFragment<FragmentAddNoteBinding>() {
                 viewModel.editNote(note.id!!)
             }
         }
+        binding.btCancel.setOnClickListener {
+            view?.findNavController()?.navigateUp()
+        }
+
     }
 
 }

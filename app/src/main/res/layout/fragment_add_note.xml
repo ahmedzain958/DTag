@@ -81,7 +81,6 @@
             android:layout_marginEnd="@dimen/margin_8dp"
             android:layout_marginBottom="@dimen/margin_8dp"
             android:background="@drawable/button_bg"
-            android:onClick="@{() -> viewmodel.onCancelClick()}"
             android:padding="@dimen/padding_8dp"
             android:text="@string/cancel"
             android:textAppearance="@android:style/TextAppearance.Large"

@@ -35,7 +35,7 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
             ViewModelProviders.of(this, notesViewModelFactory).get(NotesViewModel::class.java)
         binding.viewmodel = viewModel
 
-        viewModel.itemPagedList?.observe(this, Observer { notes: PagedList<Note> ->
+        viewModel.observableNoteList?.observe(this, Observer { notes: List<Note>? ->
             notes?.let { render(notes) }
         })
         binding.fab.setOnClickListener {
@@ -44,7 +44,7 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
         onSwipe()
     }
 
-    fun onSwipe() {
+    private fun onSwipe() {
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -60,6 +60,7 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 viewModel.delete(recyclerViewAdapter.getNoteAt(viewHolder.adapterPosition)!!)
                 context?.toast("Note deleted")
+                viewModel.loadNotes()
             }
         }).attachToRecyclerView(binding.notesRecyclerView)
     }
@@ -69,8 +70,8 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
         viewModel.loadNotes()
     }
 
-    private fun render(noteList: PagedList<Note>) {
-        recyclerViewAdapter.updateNotes(noteList)
+    private fun render(noteList: List<Note>) {
+        recyclerViewAdapter.setNotes(noteList)
         if (noteList.isEmpty()) {
             binding.notesRecyclerView.visibility = View.GONE
             binding.notesNotFound.visibility = View.VISIBLE

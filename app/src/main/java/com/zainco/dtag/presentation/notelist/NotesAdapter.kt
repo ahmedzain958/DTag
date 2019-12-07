@@ -52,7 +52,7 @@ class NotesAdapter(
         return noteList[position]
     }
 
-    fun updateNotes(noteList: PagedList<Note>) {
+    fun setNotes(noteList: List<Note>) {
         val diffResult = DiffUtil.calculateDiff(NoteDiffCallback(this.noteList, noteList))
         this.noteList = noteList
         diffResult.dispatchUpdatesTo(this)

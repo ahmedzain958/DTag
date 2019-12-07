@@ -17,7 +17,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController = findNavController(R.id.nav_host_fragment)
-        setSupportActionBar(binding.toolbar)
 //        setupActionBarWithNavController(navController)
     }
 

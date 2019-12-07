@@ -27,7 +27,6 @@ class NotesViewModel(
         get() = noteList
 
 
-    //creating livedata for PagedList  and PagedKeyedDataSource
     var itemPagedList: LiveData<PagedList<Note>>? = null
     var liveDataSource: LiveData<PageKeyedDataSource<Int, Note>>? = null
 

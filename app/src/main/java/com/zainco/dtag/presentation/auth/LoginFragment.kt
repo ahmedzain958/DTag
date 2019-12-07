@@ -36,12 +36,15 @@ class LoginFragment : BindingFragment<LoginFragmentBinding>(), AuthListener {
         binding.textViewSignup.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_loginFragment_to_signUpFragment)
         }
+        binding.btnSkip.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_loginFragment_to_notesListFragment)
+        }
         viewModel.authListener = this
         checkIfUserLoggedIn()
 
     }
 
-    fun checkIfUserLoggedIn() {
+    private fun checkIfUserLoggedIn() {
         if (viewModel.isUserLoggedIn()) {
             view?.findNavController()?.navigate(R.id.action_loginFragment_to_notesListFragment)
         }

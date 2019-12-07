@@ -11,7 +11,7 @@ class NotesDataSource(private val notesRepository: NotesRepository) :
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Note>
     ) {
-        val notes = notesRepository.noteLiveData.value
+        val notes: List<Note>? = notesRepository.noteLiveData.value
         callback.onResult(notes ?: listOf(), null, 2)
     }
 
