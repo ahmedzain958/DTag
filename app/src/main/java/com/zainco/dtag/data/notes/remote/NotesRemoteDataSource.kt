@@ -7,7 +7,7 @@ import com.zainco.dtag.data.notes.entities.Note
 interface NotesRemoteDataSource {
     fun currentUser(): FirebaseUser?
     fun insertNote(note: Note)
-    fun getNotes(): LiveData<List<Note>>
+    fun getNotes(pageSize:Int): LiveData<List<Note>>
     fun deleteNote(note: Note)
     fun updateNote(note: Note)
 }

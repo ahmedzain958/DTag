@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.zainco.dtag.data.notes.entities.Note
 import com.zainco.dtag.data.notes.local.NotesLocalDataSource
 import com.zainco.dtag.data.notes.remote.NotesRemoteDataSource
+import com.zainco.dtag.data.notes.remote.RemoteConstants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -42,7 +43,7 @@ class NotesRepositoryImpl(
 
     override fun getAllNotes() {
         if (isUserLoggedIn()) {
-            notesRemoteDataSource.getNotes().observeForever {
+            notesRemoteDataSource.getNotes(RemoteConstants.PAGE_SIZE).observeForever {
                 _notesListLiveData.postValue(it)
             }
         } else {

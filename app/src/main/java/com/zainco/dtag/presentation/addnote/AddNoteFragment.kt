@@ -29,7 +29,7 @@ class AddNoteFragment : BindingFragment<FragmentAddNoteBinding>() {
             binding.edTitle.setText(note.title)
             binding.edDesc.setText(note.description)
             binding.btEdit.setOnClickListener {
-                viewModel.editNote(note.id)
+                viewModel.editNote(note.id!!)
             }
         }
     }

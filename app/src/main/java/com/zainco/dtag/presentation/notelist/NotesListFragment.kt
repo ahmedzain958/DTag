@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,7 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
             ViewModelProviders.of(this, notesViewModelFactory).get(NotesViewModel::class.java)
         binding.viewmodel = viewModel
 
-        viewModel.observableNoteList.observe(this, Observer { notes ->
+        viewModel.itemPagedList?.observe(this, Observer { notes: PagedList<Note> ->
             notes?.let { render(notes) }
         })
         binding.fab.setOnClickListener {
@@ -68,7 +69,7 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
         viewModel.loadNotes()
     }
 
-    private fun render(noteList: List<Note>) {
+    private fun render(noteList: PagedList<Note>) {
         recyclerViewAdapter.updateNotes(noteList)
         if (noteList.isEmpty()) {
             binding.notesRecyclerView.visibility = View.GONE

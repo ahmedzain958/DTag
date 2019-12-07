@@ -30,16 +30,17 @@ class NotesRemoteDataSourceImpl(
             }.addOnFailureListener {
                 Log.d(
                     "zzzzzz",
-                    note.title + "Error inserted document "+it.message
+                    note.title + "Error inserted document " + it.message
 
                 )
             }
 
     }
 
-    override fun getNotes(): LiveData<List<Note>> {
+    override fun getNotes(pageSize: Int): LiveData<List<Note>> {
         val noteList = MutableLiveData<List<Note>>()
         firebaseFirestore.collection(NOTEBOOK_COLLECTION)
+            .limit(pageSize.toLong())
             .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 if (firebaseFirestoreException != null) {
                     return@addSnapshotListener
@@ -50,6 +51,10 @@ class NotesRemoteDataSourceImpl(
                     if (querySnapshot.size() > 0) {
                         val notesList = mutableListOf<Note>()
                         querySnapshot.forEach { documentSnapshot ->
+                            Log.d(
+                                "zzzzzz",
+                                documentSnapshot.toString()
+                            )
                             val note = documentSnapshot.toObject(Note::class.java)
                             notesList.add(note)
                         }
@@ -72,7 +77,7 @@ class NotesRemoteDataSourceImpl(
             .addOnFailureListener { e ->
                 Log.d(
                     "zzzzzz",
-                    note.title + "Error deleting document "+e.message
+                    note.title + "Error deleting document " + e.message
 
                 )
             }

@@ -72,6 +72,7 @@ ext {
             archRuntime        : "android.arch.lifecycle:runtime:${archCompVersion}",
             archExtensions     : "android.arch.lifecycle:extensions:${archCompVersion}",
             archCompiler       : "android.arch.lifecycle:compiler:${archCompVersion}",
+            paging             : "android.arch.paging:runtime:${archCompVersion}",
             lifecycle          : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
             koinCore           : "org.koin:koin-core:${koin}",
             koinTest           : "org.koin:koin-test:${koin}",

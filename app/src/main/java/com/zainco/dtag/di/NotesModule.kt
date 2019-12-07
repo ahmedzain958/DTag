@@ -11,6 +11,7 @@ import com.zainco.dtag.data.notes.remote.NotesRemoteDataSource
 import com.zainco.dtag.data.notes.remote.NotesRemoteDataSourceImpl
 import com.zainco.dtag.presentation.addnote.AddNoteViewModelFactory
 import com.zainco.dtag.presentation.notelist.NotesViewModelFactory
+import com.zainco.dtag.presentation.notelist.paging.NotesDataSource
 import org.koin.dsl.module.module
 
 
@@ -22,9 +23,10 @@ val notesModule = module {
     single {
         get<NoteDatabase>().noteDao()
     }
+    factory { NotesDataSource(get()) }
     factory<NotesLocalDataSource> { NotesLocalDataSourceImpl(get()) }
-    factory<NotesRemoteDataSource> { NotesRemoteDataSourceImpl(get(),get()) }
-    factory<NotesRepository> { NotesRepositoryImpl(get(),get()) }
+    factory<NotesRemoteDataSource> { NotesRemoteDataSourceImpl(get(), get()) }
+    factory<NotesRepository> { NotesRepositoryImpl(get(), get()) }
     factory { NotesViewModelFactory(get()) }
     factory { AddNoteViewModelFactory(get()) }
 

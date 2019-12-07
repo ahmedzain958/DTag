@@ -1,13 +1,20 @@
 package com.zainco.dtag.presentation.notelist
 
+import android.content.ClipData.Item
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PageKeyedDataSource
+import androidx.paging.PagedList
 import com.leopold.mvvm.core.BaseViewModel
 import com.zainco.dtag.data.notes.NotesRepository
 import com.zainco.dtag.data.notes.entities.Note
+import com.zainco.dtag.presentation.notelist.paging.ItemDataSourceFactory
+import com.zainco.dtag.presentation.notelist.paging.NotesDataSource
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-
 
 class NotesViewModel(
     private val repository: NotesRepository
@@ -19,13 +26,18 @@ class NotesViewModel(
     val observableNoteList: LiveData<List<Note>>
         get() = noteList
 
+
+    //creating livedata for PagedList  and PagedKeyedDataSource
+    var itemPagedList: LiveData<PagedList<Note>>? = null
+    var liveDataSource: LiveData<PageKeyedDataSource<Int, Note>>? = null
+
+
     init {
         error.postValue(false)
         errorMsg.observeForever {
             error.postValue(true)
         }
     }
-
 
     fun update(note: Note) {
         addToDisposable(
@@ -53,7 +65,22 @@ class NotesViewModel(
 
     fun loadNotes() {
         repository.getAllNotes()
-        noteList.postValue(repository.noteLiveData.value)
+
+
+        val itemDataSourceFactory = ItemDataSourceFactory(repository)
+
+        //getting the live data source from data source factory
+        liveDataSource = itemDataSourceFactory.getItemLiveDataSource()
+
+        //Getting PagedList config
+        val pagedListConfig = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setPageSize(PAGE_SIZE).build()
+
+        itemPagedList = LivePagedListBuilder(itemDataSourceFactory, pagedListConfig)
+            .build();
+
+        noteList.postValue(itemPagedList?.value)
     }
 
 }
