@@ -11,10 +11,8 @@ import com.zainco.dtag.R
 import com.zainco.dtag.data.notes.entities.Note
 
 
-typealias ClickListener = (Note) -> Unit
 
-class NotesAdapter(
-    private val clickListener: ClickListener
+class NotesAdapter(val onNoteClicked: OnNoteClicked
 ) : PagedListAdapter<Note, NotesAdapter.NotesViewHolder>(DiffUtilCallBack()) {
     private var noteList = emptyList<Note>()
 
@@ -30,13 +28,16 @@ class NotesAdapter(
         }
 
     }
+    interface OnNoteClicked {
+        fun setOnNoteClicked(note: Note)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         val itemContainer = LayoutInflater.from(parent.context)
             .inflate(R.layout.note_item, parent, false) as ViewGroup
         val viewHolder = NotesViewHolder(itemContainer)
         itemContainer.setOnClickListener {
-            clickListener(noteList[viewHolder.adapterPosition])
+            onNoteClicked.setOnNoteClicked(noteList[viewHolder.adapterPosition])
         }
         return viewHolder
     }

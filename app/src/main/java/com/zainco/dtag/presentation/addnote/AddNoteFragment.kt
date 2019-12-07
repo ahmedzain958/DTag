@@ -8,12 +8,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.zainco.dtag.data.notes.entities.Note
 import com.zainco.dtag.databinding.FragmentAddNoteBinding
+import com.zainco.dtag.extension.toast
+import com.zainco.dtag.presentation.auth.AuthListener
 import com.zainco.dtag.presentation.base.BindingFragment
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 
-class AddNoteFragment : BindingFragment<FragmentAddNoteBinding>() {
+class AddNoteFragment : BindingFragment<FragmentAddNoteBinding>(),AuthListener {
+
 
     private val addNoteViewModelFactory: AddNoteViewModelFactory by inject { parametersOf(this) }
     private lateinit var viewModel: AddNoteViewModel
@@ -29,8 +32,8 @@ class AddNoteFragment : BindingFragment<FragmentAddNoteBinding>() {
             val note = arguments?.getSerializable("note") as Note
             binding.btSave.visibility = View.INVISIBLE
             binding.btEdit.visibility = View.VISIBLE
-            binding.edTitle.setText(note.title)
-            binding.edDesc.setText(note.description)
+            viewModel.title = note.title
+            viewModel.description = note.description
             binding.btEdit.setOnClickListener {
                 viewModel.editNote(note.id!!)
             }
@@ -40,5 +43,11 @@ class AddNoteFragment : BindingFragment<FragmentAddNoteBinding>() {
         }
 
     }
+    override fun onSuccess() {
+        view?.findNavController()?.navigateUp()
+    }
 
+    override fun onFailure(message: String) {
+        context?.toast(message)
+    }
 }

@@ -14,19 +14,15 @@ class AddNoteViewModel(
 ) : BaseViewModel() {
     var title: String? = null
     var description: String? = null
-    private val status = MutableLiveData<Boolean>()
-
-    val observableStatus: LiveData<Boolean>
-        get() = status
 
     fun onSaveClick(view: View) {
-        val note = Note(title = title!!,description =  description!!)
+        val note = Note(title = title ?: "", description = description ?: "")
         view.closeSoftKeyboard()
         repository.insertNote(note)
     }
 
     fun editNote(noteId: Int) {
-        val note = Note(title = title!!,description =  description!!)
+        val note = Note(title = title ?: "", description = description ?: "")
         note.id = noteId
         repository.updateNote(note)
     }

@@ -1,9 +1,7 @@
 package com.zainco.dtag.presentation.auth
 
-import android.text.TextWatcher
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
-import androidx.databinding.BaseObservable
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import com.leopold.mvvm.core.BaseViewModel
@@ -38,15 +36,6 @@ class AuthViewModel(
             }
         }
     }
-
-
-   /* fun getEmailOnFocusChangeListener(): OnFocusChangeListener {
-        return onFocusEmail
-    }
-
-    fun getPasswordOnFocusChangeListener(): OnFocusChangeListener {
-        return onFocusPassword
-    }*/
 
     fun isUserLoggedIn(): Boolean {
         return repository.currentUser() != null
@@ -106,12 +95,6 @@ class AuthViewModel(
             if (editText.onFocusChangeListener == null) {
                 editText.onFocusChangeListener = onFocusChangeListener
             }
-        }
-
-        @BindingAdapter("textChangedListener")
-        @JvmStatic
-        fun bindTextWatcher(editText: EditText, textWatcher: TextWatcher?) {
-            editText.addTextChangedListener(textWatcher)
         }
     }
 

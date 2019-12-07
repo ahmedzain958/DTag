@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.zainco.dtag.data.notes.entities.Note
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 class NotesLocalDataSourceImpl(
@@ -18,7 +19,7 @@ class NotesLocalDataSourceImpl(
     override val errorLoading: LiveData<String>
         get() = _errorLoading
 
-    override fun getNotes(): LiveData<List<Note>> {
+    override fun getNotes(): Observable<List<Note>> {
         return noteDao.getAllNotes()
     }
 

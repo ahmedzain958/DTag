@@ -19,12 +19,11 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 
-class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
+class NotesListFragment : BindingFragment<NotesListFragmentBinding>(),NotesAdapter.OnNoteClicked {
 
-    private val clickListener: ClickListener = this::onNoteClicked
     private val notesViewModelFactory: NotesViewModelFactory by inject { parametersOf(this) }
     private lateinit var viewModel: NotesViewModel
-    private val recyclerViewAdapter = NotesAdapter(clickListener)
+    private val recyclerViewAdapter = NotesAdapter(this)
     override val layoutResId: Int
         get() = R.layout.notes_list_fragment
 
@@ -34,14 +33,35 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
         viewModel =
             ViewModelProviders.of(this, notesViewModelFactory).get(NotesViewModel::class.java)
         binding.viewmodel = viewModel
-
-        viewModel.observableNoteList?.observe(this, Observer { notes: List<Note>? ->
+        viewModel.loadNotes()
+        viewModel.observableNoteList.observe(this, Observer { notes: List<Note>? ->
             notes?.let { render(notes) }
         })
         binding.fab.setOnClickListener {
             view.findNavController().navigate(R.id.action_notesListFragment_to_addNoteFragment)
         }
         onSwipe()
+    }
+
+    private fun render(noteList: List<Note>) {
+        recyclerViewAdapter.setNotes(noteList)
+        if (noteList.isEmpty()) {
+            binding.notesRecyclerView.visibility = View.GONE
+        } else {
+            binding.notesRecyclerView.visibility = View.VISIBLE
+        }
+    }
+
+    override fun setOnNoteClicked(note: Note) {
+        view?.findNavController()
+            ?.navigate(
+                NotesListFragmentDirections.actionNotesListFragmentToAddNoteFragment(note),
+                NavOptions.Builder()
+                    .setPopUpTo(
+                        R.id.notesListFragment,
+                        true
+                    ).build()
+            )
     }
 
     private fun onSwipe() {
@@ -60,37 +80,8 @@ class NotesListFragment : BindingFragment<NotesListFragmentBinding>() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 viewModel.delete(recyclerViewAdapter.getNoteAt(viewHolder.adapterPosition)!!)
                 context?.toast("Note deleted")
-                viewModel.loadNotes()
             }
         }).attachToRecyclerView(binding.notesRecyclerView)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.loadNotes()
-    }
-
-    private fun render(noteList: List<Note>) {
-        recyclerViewAdapter.setNotes(noteList)
-        if (noteList.isEmpty()) {
-            binding.notesRecyclerView.visibility = View.GONE
-            binding.notesNotFound.visibility = View.VISIBLE
-        } else {
-            binding.notesRecyclerView.visibility = View.VISIBLE
-            binding.notesNotFound.visibility = View.GONE
-        }
-    }
-
-    private fun onNoteClicked(note: Note) {
-        view?.findNavController()
-            ?.navigate(
-                NotesListFragmentDirections.actionNotesListFragmentToAddNoteFragment(note),
-                NavOptions.Builder()
-                    .setPopUpTo(
-                        R.id.notesListFragment,
-                        true
-                    ).build()
-            )
     }
 
     private fun setupRecyclerView() {

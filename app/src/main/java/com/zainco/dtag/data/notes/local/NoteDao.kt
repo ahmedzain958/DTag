@@ -5,6 +5,7 @@ import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import com.zainco.dtag.data.notes.entities.Note
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 
@@ -23,5 +24,5 @@ interface NoteDao {
     fun deleteAllNotes(): Completable
 
     @Query("SELECT * FROM note_table ORDER BY id")
-    fun getAllNotes(): LiveData<List<Note>>
+    fun getAllNotes(): Observable<List<Note>>
 }

@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.zainco.dtag.data.notes.entities.Note
 import com.zainco.dtag.data.notes.local.NotesLocalDataSource
 import com.zainco.dtag.data.notes.remote.NotesRemoteDataSource
-import com.zainco.dtag.data.notes.remote.RemoteConstants
+import com.zainco.dtag.presentation.auth.AuthListener
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -14,22 +15,17 @@ class NotesRepositoryImpl(
     private val notesLocalDataSource: NotesLocalDataSource,
     private val notesRemoteDataSource: NotesRemoteDataSource
 ) : NotesRepository {
-
+    var authListener: AuthListener? = null
     private var charactersDisposable: Disposable? = null
-    private val _errorLiveData = MutableLiveData<String>()
-    override val errorLiveData: LiveData<String>
-        get() = _errorLiveData
+    override val errorLiveData = MutableLiveData<String>()
     private val _loading = MutableLiveData<Boolean>()
     override val loading: LiveData<Boolean>
         get() = _loading
-    private val _notesListLiveData = MutableLiveData<List<Note>>()
-    override val noteLiveData: LiveData<List<Note>>
-        get() = _notesListLiveData
 
     init {
         charactersDisposable?.let { if (!it.isDisposed) it.dispose() }
         notesLocalDataSource.errorLoading.observeForever {
-            _errorLiveData.postValue(it)
+            errorLiveData.postValue(it)
         }
 
         notesLocalDataSource.loading.observeForever {
@@ -41,17 +37,14 @@ class NotesRepositoryImpl(
         return notesRemoteDataSource.currentUser() != null
     }
 
-    override fun getAllNotes() {
-        if (isUserLoggedIn()) {
-            notesRemoteDataSource.getNotes(RemoteConstants.PAGE_SIZE).observeForever {
-                _notesListLiveData.postValue(it)
-            }
+    override fun getAllNotes(): Observable<List<Note>> {
+        return if (isUserLoggedIn()) {
+            notesRemoteDataSource.getNotes().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
         } else {
-            notesLocalDataSource.getNotes().observeForever {
-                _notesListLiveData.postValue(it)
-            }
+            notesLocalDataSource.getNotes().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
         }
-
     }
 
 
@@ -64,12 +57,10 @@ class NotesRepositoryImpl(
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         {
-                            //inserted
+                            authListener?.onSuccess()
                         },
                         { throwable ->
-                            when (throwable) {
-
-                            }
+                            authListener?.onFailure(throwable.message.toString())
                         }
                     )
         }
@@ -81,8 +72,12 @@ class NotesRepositoryImpl(
         } else {
             charactersDisposable = notesLocalDataSource.update(note).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                }
+                .subscribe({
+                    authListener?.onSuccess()
+                },
+                    { throwable ->
+                        authListener?.onFailure(throwable.message.toString())
+                    })
         }
     }
 
@@ -92,8 +87,12 @@ class NotesRepositoryImpl(
         } else {
             charactersDisposable = notesLocalDataSource.delete(note).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                }
+                .subscribe ({
+                    authListener?.onSuccess()
+                },
+                    { throwable ->
+                        authListener?.onFailure(throwable.message.toString())
+                    })
         }
     }
 

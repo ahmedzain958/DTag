@@ -23,7 +23,7 @@ val notesModule = module {
     single {
         get<NoteDatabase>().noteDao()
     }
-    factory { NotesDataSource(get()) }
+//    factory { NotesDataSource(get()) }
     factory<NotesLocalDataSource> { NotesLocalDataSourceImpl(get()) }
     factory<NotesRemoteDataSource> { NotesRemoteDataSourceImpl(get(), get()) }
     factory<NotesRepository> { NotesRepositoryImpl(get(), get()) }

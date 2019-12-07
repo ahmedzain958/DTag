@@ -9,12 +9,22 @@ import com.google.firebase.firestore.SetOptions
 import com.zainco.dtag.data.auth.FirebaseAuthDataSource
 import com.zainco.dtag.data.notes.entities.Note
 import com.zainco.dtag.data.notes.remote.RemoteConstants.NOTEBOOK_COLLECTION
+import io.reactivex.Observable
+import io.reactivex.Single
 
 class NotesRemoteDataSourceImpl(
     private val firebaseAuthDataSource: FirebaseAuthDataSource,
     private val firebaseFirestore: FirebaseFirestore
 ) :
     NotesRemoteDataSource {
+    private val _loading = MutableLiveData<Boolean>()
+    override val loading: LiveData<Boolean>
+        get() = _loading
+
+    private val _errorLoading = MutableLiveData<String>()
+    override val errorLoading: LiveData<String>
+        get() = _errorLoading
+
 
     override fun currentUser(): FirebaseUser? {
         return firebaseAuthDataSource.currentUser()
@@ -37,32 +47,39 @@ class NotesRemoteDataSourceImpl(
 
     }
 
-    override fun getNotes(pageSize: Int): LiveData<List<Note>> {
-        val noteList = MutableLiveData<List<Note>>()
-        firebaseFirestore.collection(NOTEBOOK_COLLECTION)
-            .limit(pageSize.toLong())
-            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                if (firebaseFirestoreException != null) {
-                    return@addSnapshotListener
-                }
-                if (querySnapshot == null) {
-                    //no data
-                } else {
-                    if (querySnapshot.size() > 0) {
-                        val notesList = mutableListOf<Note>()
-                        querySnapshot.forEach { documentSnapshot ->
-                            Log.d(
-                                "zzzzzz",
-                                documentSnapshot.toString()
-                            )
-                            val note = documentSnapshot.toObject(Note::class.java)
-                            notesList.add(note)
+    override fun getNotes(): Observable<List<Note>> {
+        _loading.postValue(true)
+        return Observable.create<List<Note>> { emitter ->
+            val addSnapshotListener = firebaseFirestore.collection(NOTEBOOK_COLLECTION)
+                .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                    if (firebaseFirestoreException != null) {
+                        return@addSnapshotListener
+                    }
+                    if (querySnapshot == null) {
+                        _errorLoading.postValue("Error Loading Data")
+                    } else {
+                        if (querySnapshot.size() > 0) {
+                            val notesList = mutableListOf<Note>()
+                            querySnapshot.forEach { documentSnapshot ->
+                                Log.d(
+                                    "zzzzzz",
+                                    documentSnapshot.toString()
+                                )
+                                val note = documentSnapshot.toObject(Note::class.java)
+                                notesList.add(note)
+                                emitter.onNext(notesList)
+                            }
+                        } else {
+                            _errorLoading.postValue("No Data Available")
                         }
-                        noteList.postValue(notesList)
                     }
                 }
+            _loading.postValue(false)
+            emitter.setCancellable {
+                addSnapshotListener.remove()
             }
-        return noteList
+
+        }
     }
 
     override fun deleteNote(note: Note) {

@@ -11,20 +11,20 @@ class NotesDataSource(private val notesRepository: NotesRepository) :
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Note>
     ) {
-        val notes: List<Note>? = notesRepository.noteLiveData.value
-        callback.onResult(notes ?: listOf(), null, 2)
+      /*  val notes: List<Note>? = notesRepository.no.value
+        callback.onResult(notes ?: listOf(), null, 2)*/
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Note>) {
-        val notes = notesRepository.noteLiveData.value
+      /*  val notes = notesRepository.noteLiveData.value
         val key = (if (params.key == 1) params.key + 1 else null)?.toInt()
         callback.onResult(notes ?: listOf(), key);
-
+*/
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Note>) {
-        val notes = notesRepository.noteLiveData.value
+       /* val notes = notesRepository.noteLiveData.value
         val key = (if (params.key > 1) params.key - 1 else null)?.toInt()
-        callback.onResult(notes ?: listOf(), key);
+        callback.onResult(notes ?: listOf(), key);*/
     }
 }
